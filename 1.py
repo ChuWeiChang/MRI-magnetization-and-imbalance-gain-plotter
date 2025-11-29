@@ -1,36 +1,45 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+def plot(config, time_all, longitudinal, transverse):
 
-def plot(config, time_all, mag_all):
     x_ticks = [t * config["tr"] for t in range(0, config["duration"] + 2)]
-    plt.plot(time_all, mag_all)
+
+    plt.figure()
+    plt.plot(time_all, longitudinal, label="M_z (Longitudinal)", color="blue")
+    plt.plot(time_all, transverse, label="M_xy (Transverse)", color="red")
+
     plt.xticks(
         x_ticks,
         ['–TR', '0'] + [f'{i}TR' for i in range(1, len(x_ticks) - 1)]
     )
     plt.xlabel("Time")
-    plt.ylabel("M_z / M0")
-    plt.title("Longitudinal Magnetization (T1 Recovery)")
+
+    plt.ylabel("Magnetization / M0")
+    plt.title("Magnetization (T1 & T2)")
     plt.grid(True)
+    plt.legend()
     plt.show()
 
-def calc_longitudinal(config):
+def calc_magnetization(config):
     m = config["M0"]
     t1_r = lambda x: m * (1 - np.exp(-x / config["t1"]))
+    t2_r = lambda x: m * np.exp(-x / config["t2"])
 
     time_all = list(np.linspace(0, config["tr"], config["sample_num"]))
-    mag_all = [1] * config["sample_num"]
+    longitudinal = [1] * config["sample_num"]
+    transverse = [0] * config["sample_num"]
+
     for t in range(0, config["duration"]):
         time = np.linspace(0, config["tr"], config["sample_num"])
-        mag = t1_r(time)
-        time_all.extend(list(time + (t+1) * config["tr"]))
-        mag_all.extend(mag / config["M0"])
-        m = mag[-1]
-    plot(config, time_all, mag_all)
+        mz = t1_r(time)
+        mxy = t2_r(time)
 
-def calc_transverse(config):
-    pass
+        time_all.extend(list(time + (t+1) * config["tr"]))
+        longitudinal.extend(mz / config["M0"])
+        transverse.extend(mxy / config["M0"])
+        m = mz[-1]
+    plot(config, time_all, longitudinal, transverse)
 
 def main():
     config = {
@@ -41,7 +50,7 @@ def main():
         "M0": 3,
         "sample_num": 100
     }
-    calc_longitudinal(config)
+    calc_magnetization(config)
 
 if __name__ == '__main__':
     main()
