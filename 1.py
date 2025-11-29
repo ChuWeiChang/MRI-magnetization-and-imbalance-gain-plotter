@@ -8,7 +8,7 @@ def plot(config, time_all, longitudinal, transverse):
 
     # you may comment/uncomment one the following two lines to show the individual plots
     plt.plot(time_all, longitudinal, label="M_z (Longitudinal)", color="blue")
-    plt.plot(time_all, transverse, label="M_xy (Transverse)", color="red")
+    plt.plot(time_all, transverse, label="M_xy (Transverse)", color="red", alpha=0.8)
 
     plt.xticks(
         x_ticks,
@@ -23,9 +23,9 @@ def plot(config, time_all, longitudinal, transverse):
     plt.show()
 
 def calc_magnetization(config):
-    m = config["M0"]
-    t1_r = lambda x: m * (1 - np.exp(-x / config["t1"]))
-    t2_r = lambda x: m * np.exp(-x / config["t2"])
+    m0 = 1.0
+    t1_r = lambda x: m0 * (1 - np.exp(-x / config["t1"]))
+    t2_r = lambda x: m0 * np.exp(-x / config["t2"])
 
     # initial time samples for the first [-TR, 0]  interval
     time_all = list(np.linspace(0, config["tr"], config["sample_num"]))
@@ -38,8 +38,8 @@ def calc_magnetization(config):
         mxy = t2_r(time)
 
         time_all.extend(list(time + (t+1) * config["tr"]))
-        longitudinal.extend(mz / config["M0"])
-        transverse.extend(mxy / config["M0"])
+        longitudinal.extend(mz / m0)
+        transverse.extend(mxy / m0)
         m = mz[-1]
     plot(config, time_all, longitudinal, transverse)
 
@@ -49,7 +49,7 @@ def main():
         "t1": 1300,
         "t2": 80,
         "tr": 1000,
-        "M0": 3, # doesn't affect the normalized plot
+        "B0": 3, # doesn't affect the normalized plot
         "sample_num": 100 # for smooth curves
     }
     calc_magnetization(config)
