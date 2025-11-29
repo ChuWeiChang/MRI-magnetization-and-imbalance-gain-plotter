@@ -30,7 +30,7 @@ def calc_longitudinal(config):
     plot(config, time_all, mag_all)
 
 def calc_transverse(config):
-    pass
+    plot(config, time_all, mag_all)
 
 def main():
     config = {
