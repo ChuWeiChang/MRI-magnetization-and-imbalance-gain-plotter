@@ -51,7 +51,7 @@ python magnitude_plotter.py
 - To run the k-space phantom example (script `imbalanced_gain_simulator.py`):
 
 ```
-python imbalanced_gain_simulator.py
+python imbalanced_gain_simulator.py --real_scaler 1.0 --im_scaler 1.0 --size 256
 ```
 
 Notes
