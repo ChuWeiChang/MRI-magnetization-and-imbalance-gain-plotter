@@ -12,6 +12,34 @@ Install dependencies with pip (use your Python environment):
 python -m pip install -r requirement.txt
 ```
 
+Use a virtual environment (recommended)
+-------------------------------------
+It's best to run these scripts inside an isolated Python virtual environment so dependencies don't affect your system Python or other projects.
+
+For Windows (cmd.exe):
+
+```bat
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -r requirement.txt
+```
+
+For Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirement.txt
+```
+
+For macOS / Linux:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+python -m pip install -r requirement.txt
+```
+
 Quick start
 -----------
 - To run the magnetization plot (script `1.py`):
