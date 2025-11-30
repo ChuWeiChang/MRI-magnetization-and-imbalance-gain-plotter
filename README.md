@@ -49,7 +49,6 @@ python imbalanced_gain_simulator.py --real_scaler 1.0 --im_scaler 1.0 --size 256
 
 Notes
 -----
-- `imbalanced_gain_simulator.py` uses the `phantominator` package to create a Shepp-Logan phantom image. If you don't have it installed, install it with `pip` or replace the phantom call with another image array.
 - `imbalanced_gain_simulator.py` shows how changing real and imaginary gains in k-space affects the reconstructed image magnitude. The file contains short comments explaining the FFT and reconstruction steps.
 
 License
