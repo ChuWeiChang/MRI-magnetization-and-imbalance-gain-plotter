@@ -9,8 +9,8 @@ def parse_args():
 
     parser.add_argument(
         "--duration",
-        type=float,
-        default=4.0,
+        type=int,
+        default=4,
         help="Duration in units of TR (default: 4)",
     )
     parser.add_argument(
