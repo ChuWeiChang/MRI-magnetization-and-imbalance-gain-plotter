@@ -44,7 +44,7 @@ if __name__ == "__main__":
         "--im_scaler",
         type=float,
         default=1.0,
-        help="Scaling factor for imaginary part of k-space (default: 0.0)",
+        help="Scaling factor for imaginary part of k-space (default: 1.0)",
     )
     parser.add_argument(
         "--size",
