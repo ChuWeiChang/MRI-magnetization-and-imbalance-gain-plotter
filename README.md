@@ -6,14 +6,7 @@ A small set of Python scripts to demonstrate simple MRI concepts:
 
 Requirements
 ------------
-Install dependencies with pip (use your Python environment):
 
-```
-python -m pip install -r requirement.txt
-```
-
-Use a virtual environment (recommended)
--------------------------------------
 It's best to run these scripts inside an isolated Python virtual environment so dependencies don't affect your system Python or other projects.
 
 For Windows (cmd.exe):
