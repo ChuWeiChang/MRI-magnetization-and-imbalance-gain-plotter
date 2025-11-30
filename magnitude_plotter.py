@@ -23,7 +23,7 @@ def plot(config, time_all, longitudinal, transverse):
     plt.show()
 
 def calc_magnetization(config):
-    m0 = 1.0
+    m0 = config["B0"]
     t1_r = lambda x: m0 * (1 - np.exp(-x / config["t1"]))
     t2_r = lambda x: m0 * np.exp(-x / config["t2"])
 
@@ -38,9 +38,9 @@ def calc_magnetization(config):
         mxy = t2_r(time)
 
         time_all.extend(list(time + (t+1) * config["tr"]))
-        longitudinal.extend(mz / m0)
-        transverse.extend(mxy / m0)
-        m = mz[-1]
+        longitudinal.extend(mz / config["B0"])
+        transverse.extend(mxy / config["B0"])
+        m0 = mz[-1]
     plot(config, time_all, longitudinal, transverse)
 
 def main():
