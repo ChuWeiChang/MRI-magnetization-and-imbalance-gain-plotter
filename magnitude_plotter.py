@@ -1,5 +1,50 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Simulate MRI magnetization evolution."
+    )
+
+    parser.add_argument(
+        "--duration",
+        type=float,
+        default=4.0,
+        help="Duration in units of TR (default: 4)",
+    )
+    parser.add_argument(
+        "--t1",
+        type=float,
+        default=1300.0,
+        help="T1 in ms (default: 1300)",
+    )
+    parser.add_argument(
+        "--t2",
+        type=float,
+        default=80.0,
+        help="T2 in ms (default: 80)",
+    )
+    parser.add_argument(
+        "--tr",
+        type=float,
+        default=1000.0,
+        help="TR in ms (default: 1000)",
+    )
+    parser.add_argument(
+        "--B0",
+        type=float,
+        default=3.0,
+        help="Main field strength in Tesla (default: 3; only for reference).",
+    )
+    parser.add_argument(
+        "--sample-num",
+        type=int,
+        default=100,
+        help="Number of sample points for plotting (default: 100)",
+    )
+
+    return parser.parse_args()
 
 def plot(config, time_all, longitudinal, transverse):
     x_ticks = [t * config["tr"] for t in range(0, config["duration"] + 2)]
@@ -44,13 +89,14 @@ def calc_magnetization(config):
     plot(config, time_all, longitudinal, transverse)
 
 def main():
+    args = parse_args()
     config = {
-        "duration": 4,
-        "t1": 1300,
-        "t2": 80,
-        "tr": 1000,
-        "B0": 3, # doesn't affect the normalized plot
-        "sample_num": 100 # for smooth curves
+        "duration": args.duration,
+        "t1": args.t1,
+        "t2": args.t2,
+        "tr": args.tr,
+        "B0": args.B0,  # doesn't affect the normalized plot
+        "sample_num": args.sample_num,
     }
     calc_magnetization(config)
 

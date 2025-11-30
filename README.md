@@ -38,7 +38,7 @@ Quick start
 - To run the magnetization plot (script `magnitude_plotter.py`):
 
 ```
-python magnitude_plotter.py
+python magnitude_plotter.py --t1 1300 --t2 80 --tr 1000 --duration 4 --sample-num 100
 ```
 
 - To run the k-space phantom example (script `imbalanced_gain_simulator.py`):
