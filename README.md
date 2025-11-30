@@ -1,8 +1,8 @@
 # MRI magnetization and k-space imbalance plotter
 
 A small set of Python scripts to demonstrate simple MRI concepts:
-- `1.py`: plots simple longitudinal (M_z) and transverse (M_xy) magnetization curves using T1/T2 exponential models.
-- `2.py`: generates a Shepp-Logan phantom, modifies k-space by scaling real/imaginary parts, and shows the original and reconstructed magnitude images.
+- `magnitude_plotter.py`: plots simple longitudinal (M_z) and transverse (M_xy) magnetization curves using T1/T2 exponential models.
+- `imbalanced_gain_simulator.py`: generates a Shepp-Logan phantom, modifies k-space by scaling real/imaginary parts, and shows the original and reconstructed magnitude images.
 
 Requirements
 ------------
@@ -37,27 +37,27 @@ For macOS / Linux:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-python -m pip install -r requirement.txt
+python -m pip install -r requirements.txt
 ```
 
 Quick start
 -----------
-- To run the magnetization plot (script `1.py`):
+- To run the magnetization plot (script `magnitude_plotter.py`):
 
 ```
-python 1.py
+python magnitude_plotter.py
 ```
 
-- To run the k-space phantom example (script `2.py`):
+- To run the k-space phantom example (script `imbalanced_gain_simulator.py`):
 
 ```
-python 2.py
+python imbalanced_gain_simulator.py
 ```
 
 Notes
 -----
-- `2.py` uses the `phantominator` package to create a Shepp-Logan phantom image. If you don't have it installed, install it with `pip` or replace the phantom call with another image array.
-- `2.py` shows how changing real and imaginary gains in k-space affects the reconstructed image magnitude. The file contains short comments explaining the FFT and reconstruction steps.
+- `imbalanced_gain_simulator.py` uses the `phantominator` package to create a Shepp-Logan phantom image. If you don't have it installed, install it with `pip` or replace the phantom call with another image array.
+- `imbalanced_gain_simulator.py` shows how changing real and imaginary gains in k-space affects the reconstructed image magnitude. The file contains short comments explaining the FFT and reconstruction steps.
 
 License
 -------
